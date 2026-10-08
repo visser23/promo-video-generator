@@ -25,3 +25,7 @@ node tools/render.js examples/pitchcraft --frames --workers 5
 python3 examples/pitchcraft/sound.py
 bash tools/build.sh examples/pitchcraft        # -> out/pitchcraft/pitchcraft.mp4
 ```
+
+## Optional tools
+
+This example uses the HTML/Chrome/ffmpeg pipeline only; Tesseract is not needed to rebuild it. For new projects, agents may choose the separate Mirage Tesseract tools where native editing or asset preparation helps. Read [setup and integration limits](../../docs/TESSERACT.md) first: Tesseract cannot directly render `promo.js` or consume this example's `cues.json`.

@@ -50,6 +50,12 @@ bash tools/build.sh examples/pitchcraft                         # -> out/pitchcr
 
 `npm test` runs an end-to-end smoke test (stills, determinism, sub-frames, sound, mp4 probe, error handling) in about a minute.
 
+## Optional Mirage Tesseract tools
+
+Agents may also choose [Mirage Tesseract](https://github.com/mirage-hq/Tesseract) for native footage editing, motion graphics or static assets when useful. It is a separate CLI and skill bundle, not an npm dependency or a replacement for `seek(t)`. The existing pipeline and included example do not require it.
+
+See [optional setup and workflow guidance](docs/TESSERACT.md) for the version-matched **v0.3.1** release, supported platforms, checksum verification, usage terms and integration limits. No Tesseract binaries or skills are bundled or installed automatically.
+
 ## How it works
 
 ```

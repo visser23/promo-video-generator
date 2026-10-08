@@ -79,3 +79,7 @@ Rules of thumb you can state: one idea per beat; 3-5 beats in 15 s; text on scre
 - **Be specific about feelings, not just objects.** "Calm confidence that snaps into energy at the drop" beats "make it cool".
 - **It cannot listen.** Audio is verified by numbers. Give feedback by ear ("the riser is too harsh, lower and slower") and let it adjust.
 - **Ask for the commit last.** The AI should not commit or push unless you tell it to.
+
+## 7. Optional Tesseract brief
+
+The kickoff prompt above uses the existing HTML pipeline. If useful, add: "You may choose Mirage Tesseract for native editing or asset preparation. Read `docs/TESSERACT.md` first, explain the selected workflow and check the matching CLI/skills and terms. Do not make it a required dependency or convert the HTML scene implicitly. Deliver any native editable source alongside the verified output and its own re-render commands."

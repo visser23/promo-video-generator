@@ -22,6 +22,12 @@ node tools/doctor.js          # must end with "All good" - needs node 18+, Chrom
 
 If Chrome is missing: `PV_CHANNEL="" npx playwright-core install chromium` and prefix commands with `PV_CHANNEL=""`.
 
+## Optional Tesseract tools
+
+Read [docs/TESSERACT.md](docs/TESSERACT.md) if native editing, an editable `.tsrct` document or asset preparation would help the brief. You may choose Mirage Tesseract; it is not mandatory and its absence must not block the HTML workflow. Review its terms and use matching v0.3.1 skills/CLI. Discover `tsrct` and verify its version using that guide before use; do not install an OCR package, invent an npm dependency or automatically download binaries.
+
+Keep `seek(t)` deterministic when importing prepared assets. Tesseract cannot run our DOM/CSS scenes or automatically consume `cues.json`. For a separate native production, explain the choice, retain editable source in `projects/<name>/`, place generated output in `out/<name>/`, and follow upstream native preview/export guidance. Our doctor and smoke tests do not validate its renderer. Verify the actual native export and report checks you could not perform. The workflow below applies to the existing HTML pipeline.
+
 ## Workflow (do these in order)
 
 ### 0. Brief - decide before you build
