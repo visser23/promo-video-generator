@@ -56,6 +56,10 @@ Agents may also choose [Mirage Tesseract](https://github.com/mirage-hq/Tesseract
 
 See [optional setup and workflow guidance](docs/TESSERACT.md) for the version-matched **v0.3.1** release, supported platforms, checksum verification, usage terms and integration limits. No Tesseract binaries or skills are bundled or installed automatically.
 
+## Optional shot and rhythm tools
+
+For multi-shot films, music-led accents, multi-stop paths or hand-drawn outlines, load `lib/timing.js` after `lib/motion.js`. It adds `PV.keyframes`, `PV.beatClock`, `PV.boil` and `PV.shots` with no new dependencies or renderer changes. See [usage, workflow and provenance](docs/TIMING.md).
+
 ## How it works
 
 ```
@@ -76,6 +80,7 @@ See [optional setup and workflow guidance](docs/TESSERACT.md) for the version-ma
 
 ```
 lib/motion.js         browser toolkit (window.PV): maths, easings, spring, rng, put/mk, kinetic type, shake     docs/API.md
+lib/timing.js        optional keyframes, beat clock, hand-drawn boil and shot routing (docs/TIMING.md)
 lib/motion.css        optional base CSS: .abs .line .ch .glass .persp
 lib/synth.py          procedural sound studio: kick, hat, clap, bass, pluck, bell, pad, tick, whoosh, riser, boom, master()
 tools/render.js       scene -> stills / sub-frames            tools/build.sh      sub-frames + wav -> mp4

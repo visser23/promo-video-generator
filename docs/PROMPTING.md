@@ -83,3 +83,7 @@ Rules of thumb you can state: one idea per beat; 3-5 beats in 15 s; text on scre
 ## 7. Optional Tesseract brief
 
 The kickoff prompt above uses the existing HTML pipeline. If useful, add: "You may choose Mirage Tesseract for native editing or asset preparation. Read `docs/TESSERACT.md` first, explain the selected workflow and check the matching CLI/skills and terms. Do not make it a required dependency or convert the HTML scene implicitly. Deliver any native editable source alongside the verified output and its own re-render commands."
+
+## 8. Optional rhythm or illustrated-motion brief
+
+Add when useful: "Read `docs/TIMING.md`. You may use the optional shot, keyframe, beat-clock and boil helpers. Put measured BPM, beat-zero offset and shot boundaries in `cues.json`. Use subtle stepped variation on decorative outlines only; keep product UI and text steady. Review exact cuts, boil bucket boundaries and backwards seeks using the final shutter settings. For parallel shot work, agree on transitions and keep shared timing under one owner."

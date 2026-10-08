@@ -67,6 +67,10 @@ The single source of timing for picture **and** sound.
 - **3D carousel:** parent `perspective: 2400px`, cards `transform: rotateY(a) translateZ(R)` via `put({ry, z})`.
 - **Painted background:** a `<canvas>` redrawn from scratch in every `seek` (gradients with `globalCompositeOperation = 'lighter'`, dot grid, vignette, seeded grain).
 
+## Optional timing helpers
+
+Load `lib/timing.js` after `motion.js` to add `keyframes(entries, easing?)`, `beatClock(bpm, offset?)`, `boil(t, id, rate?, seed?)` and `shots(entries, end)`. See [contracts and complete usage recipes](TIMING.md). They are pure-time helpers, not a second renderer.
+
 ## `lib/synth.py`
 
 ```python

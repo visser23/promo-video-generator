@@ -28,6 +28,10 @@ Read [docs/TESSERACT.md](docs/TESSERACT.md) if native editing, an editable `.tsr
 
 Keep `seek(t)` deterministic when importing prepared assets. Tesseract cannot run our DOM/CSS scenes or automatically consume `cues.json`. For a separate native production, explain the choice, retain editable source in `projects/<name>/`, place generated output in `out/<name>/`, and follow upstream native preview/export guidance. Our doctor and smoke tests do not validate its renderer. Verify the actual native export and report checks you could not perform. The workflow below applies to the existing HTML pipeline.
 
+## Optional shot and rhythm tools
+
+Read [docs/TIMING.md](docs/TIMING.md) when a brief needs multi-shot routing, multi-stop scalar/vector paths, music-led motion or hand-drawn variation. Load `lib/timing.js` after `motion.js` only when useful. Keep tempo, beat offset and shot boundaries in `cues.json`; use stable object/axis identities for boil. Hide every inactive scene on every seek, reset overlays, and verify exact cuts plus out-of-order seeks. For parallel scene authoring, allocate private modules and keep shared cues under one owner. These tools do not change the HTML or optional native renderer choices.
+
 ## Workflow (do these in order)
 
 ### 0. Brief - decide before you build
@@ -101,6 +105,7 @@ Tell the user: the mp4 path, duration/resolution, a beat-by-beat description, ho
 
 ```
 lib/motion.js       browser toolkit: easings, spring, seeded rng, put/mk, kinetic type, shake        (docs/API.md)
+lib/timing.js      optional keyframes, beat clock, hand-drawn boil and shot routing (docs/TIMING.md)
 lib/motion.css      optional base CSS (.abs .line .ch .glass .persp)
 lib/synth.py        procedural sound studio: instruments, add(), master()                          (docs/API.md)
 tools/render.js     scene -> stills / sub-frames          tools/build.sh   sub-frames (+wav) -> mp4

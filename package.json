@@ -7,7 +7,7 @@
   "scripts": {
     "doctor": "node tools/doctor.js",
     "new": "bash tools/new-project.sh",
-    "test": "node tests/smoke.js"
+    "test": "node tests/timing.js && node tests/timing-browser.js && node tests/smoke.js"
   },
   "dependencies": {
     "playwright-core": "^1.49.0"
