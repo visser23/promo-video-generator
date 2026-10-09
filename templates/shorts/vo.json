@@ -1,0 +1,7 @@
+{
+  "engine": "kokoro", "voice": "bm_george", "lang": "en-gb", "length_scale": 0.95, "sentence_gap": 0.2,
+  "lines": [
+    { "id": "l0", "text": "A short, *specific* opening line that makes a claim.", "at": 0.4 },
+    { "id": "l1", "text": "Then one more fact, and a question to *end* on?", "at": 4.6 }
+  ]
+}

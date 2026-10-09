@@ -1,0 +1,11 @@
+{
+  "title": "A specific, curious title (under 70 characters)",
+  "summary": "One or two sentences: what the viewer learns. This is what shows in the feed.",
+  "facts": ["Each bullet is a checkable claim you made in the film."],
+  "credits": [],
+  "sources": [{ "label": "Source name", "url": "https://example.org/" }],
+  "hashtags": ["#History", "#Shorts"],
+  "tags": ["topic", "history shorts"],
+  "category": "Education", "language": "en",
+  "ai": { "voice": true, "music": true, "visuals": false }
+}

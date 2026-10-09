@@ -43,6 +43,9 @@ Give every beat a start time. Rough budget for a 15 s film: spark/hook 0-3, beat
 ### 2. Get real pictures
 A promo about software is only convincing with the **real product on screen**. Photograph it (see `examples/pitchcraft/capture-assets.js`): Playwright screenshots at device scale factor 2 for slides/cards, a 1920x1080 screenshot per UI state, and the bounding rects of elements you will point at (so a fake cursor lands on the real button). Save to `projects/<name>/assets/`. Never use the user's private data, real accounts or apps (do not script PowerPoint, Keynote, etc.), and avoid anything on the user's screen: use headless only.
 
+### 2b. Vertical Shorts from archival film
+For a YouTube Short built on real archival footage (public-domain film, AI voice, synthesised score) follow **`docs/SHORTS.md`** end to end: `tools/footage.py` (find + rights verdicts + `provenance.json`), `tools/clip.py` (shots -> frame sequences, `--ivtc` for telecined film), `lib/footage.js` + `lib/captions.js` (picture), `tools/shorts-check.py`, `tools/thumb.js`, `tools/shorts-meta.py`. Scaffold with `bash tools/new-project.sh my-short shorts`. Only footage whose rights class is public-domain/attribution may be used, and every file used needs a `provenance.json` entry. Never upload: produce `out/<name>/upload.md` and let the human publish (private first).
+
 ### 3. Scaffold and write the scene
 ```bash
 bash tools/new-project.sh my-launch        # copies templates/starter -> projects/my-launch (a working 6 s film)
@@ -55,12 +58,15 @@ After every meaningful change render stills **just before, at, and just after ea
 - nothing overlaps wrongly (titles vs panels), nothing is cut off, safe margin >= 80 px;
 - leftovers from a previous scene are gone (see gotcha 2);
 - every number/text is final when it is meant to be read (a counter that is still counting when it fades is a bug);
+- run `node tools/safe-area.js projects/<name> --every 0.5 --min-font 24` for any format that gets cropped (4:5, 1:1, 9:16) - set `"safe"` in cues.json;
 - type is readable: >= 60 px for headlines, >= 34 px for supporting text at 1080p; hold a line ~0.25 s per word, min 0.8 s;
 - motion principles: ease **out** to arrive, ease **in** to leave, overshoot/spring on things that "land", stagger groups by 0.03-0.15 s, anticipation before big moves, camera shake only on impacts, an end card held >= 1.5 s.
 
 **Vision descriptions of images are unreliable** (they invent or miss details). When it matters, measure: `page.evaluate(() => el.getBoundingClientRect())`, pixel statistics with Pillow/numpy (is the left edge dark? is anything bright where nothing should be?), pixel-diff two stills. Treat "looks fine" as a hint, numbers as truth.
 
 ### 5. Sound
+If the film needs a **voiceover**: write the script first and do the words-per-minute arithmetic (86 words cannot be 140 wpm in 30 s - tell the user, do not hide it), write `vo.json`, run `python3 tools/voiceover.py projects/<name> --align` and put picture cues on the aligned word times (`out/<name>/vo/manifest.json`); mix with `add_voice()` - `master()` ducks the music under it and reports the voice/music balance (docs/API.md "Voiceover").
+If the picture derives times (a cursor path, typing), publish them with `window.__events` and `node tools/render.js <project> --events` instead of re-deriving them in Python.
 Copy `templates/starter/sound.py` and place sounds at `C['cue']` times with `lib/synth.py` (`docs/API.md`). Pattern that works: a drone under everything, a riser into each big moment, a reverse-hit just before it, a boom + kick on it, bells/blips for UI pops, `tick()` per typed character, whooshes for transitions, a pad + bells on the end card, quieter before the drop than after. `master()` sets loudness (~-15 dBFS RMS body, -1 dBFS peak). `python3 projects/<name>/sound.py` -> `out/<name>/score.wav`. You cannot listen, so verify with numbers: per-second RMS/peak, `ffmpeg -i x.mp4 -af volumedetect -f null -`, no clipping, silence only where intended.
 
 ### 6. Full render and build
@@ -110,10 +116,13 @@ lib/motion.css      optional base CSS (.abs .line .ch .glass .persp)
 lib/synth.py        procedural sound studio: instruments, add(), master()                          (docs/API.md)
 tools/render.js     scene -> stills / sub-frames          tools/build.sh   sub-frames (+wav) -> mp4
 tools/doctor.js     dependency check                      tools/new-project.sh   scaffold a project
-tools/sheet.py      contact sheets for reviewing stills
-templates/starter/  working 6 s project to copy
+tools/sheet.py      contact sheets for reviewing stills (aspect-preserving)   tools/safe-area.js   crop-safe text check
+tools/voiceover.py  TTS + word alignment (captions, cues)    tools/footage.py   archival search/fetch + rights + provenance.json
+tools/clip.py       scan + cut film into frame sequences     lib/footage.js, lib/captions.js   archival film + word-timed captions
+tools/thumb.js      thumbnails (9:16 + 16:9)                 tools/shorts-meta.py, shorts-check.py, yt-research.py   upload metadata, mp4 spec check, topic stats
+templates/starter/  working 6 s project to copy              templates/shorts/   1080x1920 footage + captions + end-card loop
 examples/pitchcraft/  a full 15 s film made with this toolkit (+ its mp4), the best reference for quality
 projects/           YOUR projects (git-ignored)           out/   all generated output (git-ignored)
-tests/smoke.js      end-to-end test (npm test)
-docs/               API.md  PROMPTING.md  LESSONS.md
+tests/smoke.js      end-to-end test (npm test)    tests/shorts.js  footage/captions/thumb/meta/template tests
+docs/               API.md  PROMPTING.md  LESSONS.md  SHORTS.md  (project_plan.md, system_arch.md)
 ```

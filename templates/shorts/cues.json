@@ -1,0 +1,40 @@
+{
+ "_help": "vo: set true after `python3 tools/voiceover.py projects/<name> --align` (captions then come from the aligned words). shots: one entry per cut, e.g. {clip:'cloudA',a:0,b:4.5,speed:0.5,off:2,z:[1,1.1],pos:'50% 50%',dim:1}, clip = assets/clips/<id> made by tools/clip.py cut.",
+ "fps": 30,
+ "duration": 12,
+ "subframes": 4,
+ "width": 1080,
+ "height": 1920,
+ "shutter": 0.5,
+ "safe": {
+  "x": 60,
+  "y": 230,
+  "w": 900,
+  "h": 1250
+ },
+ "title": {
+  "tag": "PLACE \u00b7 DATE",
+  "lines": [
+   "YOUR HOOK",
+   "IN THREE",
+   "BIG LINES"
+  ],
+  "in": 0.35,
+  "out": 3.6,
+  "px": 190
+ },
+ "shots": [],
+ "end": {
+  "in": 8.5,
+  "lines": [
+   "YOUR LAST",
+   "LINE HERE"
+  ],
+  "cta": "COMMENT YOUR ODDS",
+  "ctaIn": 10.2,
+  "credit": "FILM: SOURCE NAME \u00b7 PUBLIC DOMAIN<br>SOURCES IN DESCRIPTION"
+ },
+ "flashAt": null,
+ "loopFlash": 11.6,
+ "vo": false
+}

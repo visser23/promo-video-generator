@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Short</title>
+<link rel="stylesheet" href="../../lib/motion.css">
+<style>
+/* fonts are bundled in ./fonts (OFL, see fonts/LICENSES.md) - never rely on installed fonts */
+@font-face { font-family: 'Anton'; src: url('fonts/anton-400.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Courier Prime'; src: url('fonts/courier-prime-400.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Courier Prime'; src: url('fonts/courier-prime-700.woff2') format('woff2'); font-weight: 700; }
+@font-face { font-family: 'Inter'; src: url('fonts/inter.woff2') format('woff2'); font-weight: 100 900; }
+#v { width: 1080px; height: 1920px; background: #000; font-family: 'Inter', sans-serif; color: #fff; }
+#foot { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, #2a1a22, #050204); }
+.pv-clip img { object-position: var(--pos, 50% 50%); }
+#vig, #scrim { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; pointer-events: none; }
+#vig { background: radial-gradient(ellipse 75% 62% at 50% 48%, rgba(0,0,0,0) 40%, rgba(0,0,0,.6) 100%); }
+#scrim { background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 52%, rgba(0,0,0,.5) 80%, rgba(0,0,0,.42) 100%); }
+#flash { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: #fff; }
+.line { font-family: 'Anton', sans-serif; letter-spacing: .01em; line-height: 1.04; filter: drop-shadow(0 8px 0 rgba(0,0,0,.55)); }
+.tag { font: 700 40px 'Courier Prime', monospace; letter-spacing: .08em; color: #ffd23f; text-shadow: 0 3px 0 rgba(0,0,0,.6); white-space: nowrap; }
+/* captions: centred on the SAFE rect (x 60..960), not the screen - the Shorts buttons sit on the right */
+.cap { left: 30px; top: 1190px; width: 960px; height: 220px; }
+.cap-g { position: absolute; left: 0; right: 0; top: 0; text-align: center; font: 400 100px/1.06 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .015em; color: #fff; text-shadow: 0 7px 0 rgba(0,0,0,.6), 0 0 28px rgba(0,0,0,.7); }
+.cap-w { display: inline-block; margin: 0 .09em; } .cap-w.on { color: #ffd23f; } .cap-w.emph { color: #ff6a2b; } .cap-w.emph.on { color: #fff2b0; }
+.pill { left: 160px; top: 1140px; width: 760px; height: 108px; border-radius: 54px; background: #ffd23f; color: #151008; display: flex; align-items: center; justify-content: center; font: 400 64px 'Anton'; letter-spacing: .05em; box-shadow: 0 12px 0 rgba(0,0,0,.45); }
+.credit { left: 60px; top: 1388px; width: 900px; text-align: center; font: 700 25px/1.35 'Courier Prime', monospace; letter-spacing: .02em; color: rgba(255,255,255,.78); text-shadow: 0 2px 0 rgba(0,0,0,.7); }
+</style></head>
+<body><div id="v"><div id="foot"></div></div>
+<script src="../../lib/motion.js"></script>
+<script src="../../lib/footage.js"></script>
+<script src="../../lib/captions.js"></script>
+<script src="scene.js"></script></body></html>

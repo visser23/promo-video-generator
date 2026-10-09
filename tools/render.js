@@ -6,6 +6,8 @@
         [--workers N]      parallel Chrome pages (default: cores - 2, max 6)
         [--only 120-180]   render just frames 120..180 (quick spot-checks; still wipes the frames dir unless --keep)
         [--keep]           do not wipe the frames dir first
+   node tools/render.js <project> --events                write window.__events (moments the picture derived at load: cursor clicks, typed text...) -> out/<name>/events.json
+        so sound.py can read them instead of re-deriving the same arithmetic (scenes publish with:  (window.__events = window.__events || {}).name = {...})
    <project> is a folder (under this repo) containing index.html and cues.json.  Optional env: PV_CHANNEL=chrome (default) | "" for bundled Chromium.
 
    Frame f, sub-frame s of S is rendered at   t = (f + (s/(S-1) - 0.5) * shutter) / fps   (shutter = fraction of a frame the "camera" is open, default 0.5).
@@ -17,7 +19,7 @@ const MIME = { '.js': 'text/javascript', '.css': 'text/css', '.html': 'text/html
 const arg = n => { const i = process.argv.indexOf('--' + n); return i < 0 ? null : (process.argv[i + 1] && !process.argv[i + 1].startsWith('--') ? process.argv[i + 1] : true); };
 
 const projectArg = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : null;
-if (!projectArg || !(arg('stills') || arg('frames'))) { console.log('usage: node tools/render.js <project-dir> (--stills 1,2.5 | --frames [--workers N] [--only a-b] [--keep])'); process.exit(2); }
+if (!projectArg || !(arg('stills') || arg('frames') || arg('events'))) { console.log('usage: node tools/render.js <project-dir> (--stills 1,2.5 | --frames [--workers N] [--only a-b] [--keep] | --events)'); process.exit(2); }
 const PROJECT = path.resolve(projectArg);
 if (!PROJECT.startsWith(REPO + path.sep)) { console.error('The project folder must live inside this repo (so ../../lib/motion.js resolves). Try projects/<name>.'); process.exit(2); }
 if (!fs.existsSync(path.join(PROJECT, 'index.html'))) { console.error('No index.html in ' + PROJECT); process.exit(2); }
@@ -46,7 +48,11 @@ if (!DUR) { console.error('cues.json needs "duration" (seconds)'); process.exit(
     catch (e) { console.error('Scene never set window.__ready - check the console errors above (missing file, JS error, or PV.ready() not called).'); await b.close(); srv.close(); process.exit(1); }
     return pg;
   };
-  if (arg('stills')) {
+  if (arg('events')) {
+    fs.mkdirSync(OUT, { recursive: true }); const pg = await open();
+    const ev = await pg.evaluate(() => window.__events || {});
+    fs.writeFileSync(OUT + '/events.json', JSON.stringify(ev, null, 1)); console.log(`events: ${Object.keys(ev).join(', ') || '(none published)'} -> ${path.relative(REPO, OUT)}/events.json`);
+  } else if (arg('stills')) {
     fs.mkdirSync(OUT + '/stills', { recursive: true }); const pg = await open();
     for (const t of String(arg('stills')).split(',').map(Number)) { await pg.evaluate(t => window.seek(t), t); await pg.screenshot({ path: `${OUT}/stills/t${t.toFixed(2)}.png` }); console.log('still', t); }
   } else {

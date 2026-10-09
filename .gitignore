@@ -30,3 +30,51 @@ __pycache__/
 test-results/
 playwright-report/
 docs/scratchpad.md
+
+# ---- guard rails for third-party material (added with the Shorts/archival-footage tools) ----
+# Cloned or downloaded tools and other people's repositories must never be swept into a commit by `git add .`.
+# Put them in one of these folders (they are ignored wholesale, so a nested .git inside is never picked up).
+vendor/
+third_party/
+external/
+tools/vendor/
+.cache/
+# Python environments and package metadata
+venv/
+env/
+*.egg-info/
+.ipynb_checkpoints/
+# Model weights (TTS voices, Whisper, ONNX/PyTorch checkpoints): large, separately licensed, re-downloadable
+models/
+*.onnx
+*.pt
+*.pth
+*.safetensors
+*.gguf
+# Other media containers and archives (downloaded archival footage, music, bundles)
+*.mkv
+*.avi
+*.mpeg
+*.mpg
+*.ogv
+*.ogg
+*.mp3
+*.m4a
+*.flac
+*.aac
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.part
+*.ytdl
+# Secrets and logins: never commit (YouTube/Google API tokens, cookies exported for yt-dlp, env files)
+.env
+.env.*
+*.pem
+*.key
+client_secret*.json
+token*.json
+cookies*.txt
+credentials*.json
